@@ -582,6 +582,9 @@ static EAS_RESULT XMF_ReadNode (EAS_HW_DATA_HANDLE hwInstData, S_XMF_DATA *pXMFD
     if ((result = XMF_ReadVLQ(hwInstData, pXMFData->fileHandle, &length)) != EAS_SUCCESS)
         return result;
 
+    if (offset - nodeOffset > headerLength)
+        return EAS_FAILURE;
+
     /* get the current location */
     if ((result = EAS_HWFilePos(hwInstData, pXMFData->fileHandle, &offset)) != EAS_SUCCESS)
         return result;
